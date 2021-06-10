@@ -1,27 +1,32 @@
-function Calculator(screenHistory, screenMainOperation) {
-  this.screenHistory = screenHistory;
-  this.screenMainOperation = screenMainOperation;
+class Calculator {
+  constructor(screenHistory, screenMainOperation) {
+    this.screenHistory = screenHistory;
+    this.screenMainOperation = screenMainOperation;
+    this.clear();
+  }
+
+  clear = function () {
+    this.mainOperation = "";
+    this.history = "";
+    this.operation = undefined;
+  };
+
+  delete = function () {};
+
+  appendNumber = function (number) {
+    if (number === "." && this.mainOperation.includes(".")) return;
+    this.mainOperation = this.mainOperation + number;
+    console.log(this.mainOperation);
+  };
+
+  chooseOperation = function (operation) {};
+
+  compute = function () {};
+
+  updateScreen = function () {
+    this.screenMainOperation.innerText = this.mainOperation;
+  };
 }
-
-Calculator.prototype.clear = function () {
-  this.mainOperation = "";
-  this.history = "";
-  this.operation = undefined;
-};
-
-Calculator.prototype.delete = function () {};
-
-Calculator.prototype.appendNumber = function (number) {
-  this.mainOperation = this.mainOperation.toString() + number.toString();
-};
-
-Calculator.prototype.chooseOperation = function (operation) {};
-
-Calculator.prototype.compute = function () {};
-
-Calculator.prototype.updateScreen = function () {
-  this.screenMainOperation.innerText = this.mainOperation;
-};
 
 const btnNumber = document.querySelectorAll(".number");
 const btnOperation = document.querySelectorAll(".operation");

@@ -34,7 +34,7 @@ class Calculator {
     // let computation;
     const prev = parseFloat(this.history);
     const current = parseFloat(this.mainOperation);
-    if (isNaN(prev) || isNaN(current)) return;
+    if (isNaN(prev)) return;
     const operand = this.operation;
 
     const COMPUTE = {
@@ -42,6 +42,11 @@ class Calculator {
       "-": () => prev - current,
       x: () => prev * current,
       "÷": () => prev / current,
+      "%": () => prev / 100,
+      Sin: () => Math.sin(prev),
+      Cos: () => Math.cos(prev),
+      Tan: () => Math.tan(prev),
+      "π": () => Math.PI * prev
     };
 
     const computation = COMPUTE[operand] ? COMPUTE[operand]() : "";

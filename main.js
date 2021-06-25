@@ -20,10 +20,6 @@ class Calculator {
     this.mainOperation = this.mainOperation + number;
   }
 
-  appendBracket() {
-    this.mainOperation = `(${this.mainOperation})`;
-  }
-
   chooseOperation(operation) {
     if (this.mainOperation === "") return;
     if (this.history !== "") {
@@ -38,7 +34,7 @@ class Calculator {
     // let computation;
     const prev = parseFloat(this.history);
     const current = parseFloat(this.mainOperation);
-    if (isNaN(prev)) return;
+    if (isNaN(prev) && isNaN(current)) return;
     const operand = this.operation;
 
     const COMPUTE = {
@@ -46,22 +42,6 @@ class Calculator {
       "-": () => prev - current,
       x: () => prev * current,
       "÷": () => prev / current,
-      "%": () => prev / 100,
-      Sin: () => Math.sin(prev),
-      Cos: () => Math.cos(prev),
-      Tan: () => Math.tan(prev),
-      π: () => Math.PI * prev,
-      "x!": (numero = prev) => {
-        Math.abs(numero);
-        let factorial = 1;
-        for (let i = 1; i <= numero; i++) {
-          factorial = factorial * i;
-        }
-        return factorial;
-      },
-      xy: () => prev ** current,
-      x2: () => prev ** 2,
-      x3: () => prev ** 3,
     };
 
     const computation = COMPUTE[operand] ? COMPUTE[operand]() : "";
@@ -135,11 +115,6 @@ btnNumber.forEach((button) => {
     calculator.appendNumber(button.innerText);
     calculator.updateScreen();
   });
-});
-
-btnBrackets.addEventListener("click", () => {
-  calculator.appendBracket();
-  calculator.updateScreen();
 });
 
 btnOperation.forEach((button) => {
